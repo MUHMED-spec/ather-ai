@@ -23,15 +23,15 @@ class ChatRequest(BaseModel):
 
 @app.post("/chat")
 def chat_with_ather(request: ChatRequest):
-    
     if not GEMINI_API_KEY:
         raise HTTPException(status_code=500, detail="المفتاح غير موجود")
     try:
+        # استخدام الموديل القياسي المستقر
         model = genai.GenerativeModel("gemini-1.5-flash")
         response = model.generate_content(
-            f"أنت أثير، مهندس ذكي يجيب باختصار شديد بالعربية وبدون مقدمات.\nالسؤال: {request.message}"
+            f"أنت أثير (Ather AI)، مهندس ومخترع يجيب بصراحة وإيجاز شديد وبدون أي مقدمات بالعربية.\nالسؤال: {request.message}"
         )
         return {"reply": response.text.strip()}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-      
+        
