@@ -23,6 +23,7 @@ class ChatRequest(BaseModel):
 
 @app.post("/chat")
 def chat_with_ather(request: ChatRequest):
+    
     if not GEMINI_API_KEY:
         raise HTTPException(status_code=500, detail="المفتاح غير موجود")
     try:
